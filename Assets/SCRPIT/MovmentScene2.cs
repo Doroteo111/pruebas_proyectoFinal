@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovmentScene2 : MonoBehaviour
 {
     private float horizontalInput, verticalInput; //movment
+    private float moveSpeed;
     public float turnSpeed = 60f; //speed
     public float walkSpeed = 8f;
     public float runSpeed= 20f;
@@ -15,10 +16,12 @@ public class MovmentScene2 : MonoBehaviour
 
     private bool isOnTheGround;
     private Rigidbody _rigidbody;
+    private Animator _animator;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponentInChildren<Animator>();
    
     }
     private void Update()
@@ -44,24 +47,42 @@ public class MovmentScene2 : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
 
-       transform.Translate(Vector3.forward * walkSpeed * Time.deltaTime * verticalInput);
+       transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * verticalInput);
         transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime * horizontalInput);
 
         if (!Input.GetKey(KeyCode.LeftShift))
         {
-            //walk
+            Walk();
         }
         else if (Input.GetKey(KeyCode.LeftShift))
         {
-            //run
+            Run();
+        }
+        else if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            Idle();
         }
     }
 
+    private void Idle()
+    {
+        _animator.SetFloat("Speed", 0f, 0.1f, Time.deltaTime);
+    }
+
+    private void Walk()
+    {
+        moveSpeed = walkSpeed;
+        _animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+    }
+    private void Run()
+    {
+        moveSpeed = runSpeed;
+        _animator.SetFloat("Speed", 1f, 0.1f,Time.deltaTime); //adding the smooth
+    }
     private void Jump()
     {
         isOnTheGround = false;
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        //_animator.SetTrigger("Jump_trig"); 
-
+       
     }
 }
