@@ -27,13 +27,18 @@ public class MovmentScene2 : MonoBehaviour
     private void Update()
     {
         Movment();
+        if (Input.GetKeyDown(KeyCode.Mouse0)) //left botton down
+        {
+            Attack();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && isOnTheGround ) //salto con el espacio y no podré saltar si es gameover(MUERTO)
         {
             Jump();
         }
     }
 
-    private void OnCollisionEnter(Collision otherCollider)
+    private void OnCollisionEnter(Collision otherCollider) //collider ground
     {
         if (otherCollider.gameObject.CompareTag("Ground"))
         {
@@ -54,7 +59,7 @@ public class MovmentScene2 : MonoBehaviour
         {
             Walk();
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.LeftShift)) 
         {
             Run();
         }
@@ -84,5 +89,10 @@ public class MovmentScene2 : MonoBehaviour
         isOnTheGround = false;
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
        
+    }
+
+    private void Attack()
+    {
+        _animator.SetTrigger("Attack");
     }
 }
