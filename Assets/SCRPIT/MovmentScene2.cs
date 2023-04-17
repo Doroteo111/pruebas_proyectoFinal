@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MovmentScene2 : MonoBehaviour
 {
-    private float horizontalInput, verticalInput; //movment
+    private float verticalInput; //movment
     private float moveSpeed;
     public float turnSpeed = 60f; //speed
     public float walkSpeed = 8f;
     public float runSpeed= 20f;
 
-   public float jumpForce = 10f;
+    public float jumpForce = 10f;
 
-    
+    public float mouseSensitivity;
 
     private bool isOnTheGround;
     private Rigidbody _rigidbody;
@@ -22,11 +22,13 @@ public class MovmentScene2 : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
-   
+        Cursor.lockState = CursorLockMode.Locked; //press [esc] to exit the mode
+
     }
     private void Update()
     {
         Movment();
+
         if (Input.GetKeyDown(KeyCode.Mouse0)) //left botton down
         {
             Attack();
@@ -48,24 +50,25 @@ public class MovmentScene2 : MonoBehaviour
    
     private void Movment()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+       
         verticalInput = Input.GetAxis("Vertical");
+       transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * verticalInput); //right,horizontal
 
+        float mouseX = Input.GetAxis("Mouse X"); //mouse rotation
+                                                 
+        transform.Rotate(Vector3.up, mouseSensitivity * mouseX * Time.deltaTime);
 
-       transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime * verticalInput);
-        transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime * horizontalInput);
-
-        if (!Input.GetKey(KeyCode.LeftShift))
+        if (!(verticalInput != 0))
+        {
+            Idle();
+        }
+        else if (!Input.GetKey(KeyCode.LeftShift)) 
         {
             Walk();
         }
-        else if (Input.GetKey(KeyCode.LeftShift)) 
+        else 
         {
             Run();
-        }
-        else if (!Input.GetKey(KeyCode.LeftShift))
-        {
-            Idle();
         }
     }
 
@@ -93,6 +96,7 @@ public class MovmentScene2 : MonoBehaviour
 
     private void Attack()
     {
+        _animator.SetInteger("Attack_type", Random.Range(1, 3));
         _animator.SetTrigger("Attack");
     }
 }
