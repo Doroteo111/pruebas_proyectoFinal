@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class MovmentScene2 : MonoBehaviour
 {
@@ -18,11 +20,21 @@ public class MovmentScene2 : MonoBehaviour
     private Rigidbody _rigidbody;
     private Animator _animator;
 
+
+    //reference other script
+
+    public float staminaUseAmount = 5f;
+    //private StaminaBar staminaSlider; ********************
+
+
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked; //press [esc] to exit the mode
+
+        //staminaSlider = FindObjectOfType<StaminaBar>(); ********************
 
     }
     private void Update()
@@ -81,11 +93,17 @@ public class MovmentScene2 : MonoBehaviour
     {
         moveSpeed = walkSpeed;
         _animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+
+        //adding stamina bar
+        //staminaSlider.UseStamina(0); ********************
     }
     private void Run()
     {
         moveSpeed = runSpeed;
         _animator.SetFloat("Speed", 1f, 0.1f,Time.deltaTime); //adding the smooth
+
+        //adding stamina bar
+        //staminaSlider.UseStamina(staminaUseAmount); ********************
     }
     private void Jump()
     {
