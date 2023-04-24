@@ -24,7 +24,7 @@ public class MovmentScene2 : MonoBehaviour
     //reference other script
 
     public float staminaUseAmount = 5f;
-    //private StaminaBar staminaSlider; ********************
+    private UIStaminaBar staminaSlider; 
 
 
 
@@ -34,7 +34,7 @@ public class MovmentScene2 : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked; //press [esc] to exit the mode
 
-        //staminaSlider = FindObjectOfType<StaminaBar>(); ********************
+        staminaSlider = FindObjectOfType<UIStaminaBar>(); 
 
     }
     private void Update()
@@ -86,6 +86,7 @@ public class MovmentScene2 : MonoBehaviour
 
     private void Idle()
     {
+        moveSpeed = 0;
         _animator.SetFloat("Speed", 0f, 0.1f, Time.deltaTime);
     }
 
@@ -95,7 +96,7 @@ public class MovmentScene2 : MonoBehaviour
         _animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
 
         //adding stamina bar
-        //staminaSlider.UseStamina(0); ********************
+        staminaSlider.UseStamina(0); 
     }
     private void Run()
     {
@@ -103,7 +104,7 @@ public class MovmentScene2 : MonoBehaviour
         _animator.SetFloat("Speed", 1f, 0.1f,Time.deltaTime); //adding the smooth
 
         //adding stamina bar
-        //staminaSlider.UseStamina(staminaUseAmount); ********************
+        staminaSlider.UseStamina(staminaUseAmount);
     }
     private void Jump()
     {
