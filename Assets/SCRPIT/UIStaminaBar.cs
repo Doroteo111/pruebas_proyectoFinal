@@ -54,8 +54,8 @@ public class UIStaminaBar : MonoBehaviour
             yield return new WaitForSeconds(losingStaminaTime);
         }
 
-        //FindObjectOfType<MovmentScene2>().walkSpeed = true;
-       //necesito el float de andar aaaa eso o que se convierta en bool
+        FindObjectOfType<MovmentScene2>().hasStamina = false;
+       
        
     }
 

@@ -8,9 +8,10 @@ public class MovmentScene2 : MonoBehaviour
 {
     private float verticalInput; //movment
     private float moveSpeed;
-    public float turnSpeed = 60f; //speed
-    public float walkSpeed = 8f;
-    public float runSpeed= 20f;
+    public bool hasStamina=true;
+    public  float turnSpeed = 60f; //speed
+    public const float WALK_SPEED = 8f;
+    public const float RUN_SPEED = 20f;
 
     public float jumpForce = 10f;
 
@@ -74,13 +75,13 @@ public class MovmentScene2 : MonoBehaviour
         {
             Idle();
         }
-        else if (!Input.GetKey(KeyCode.LeftShift)) 
+        else if (Input.GetKey(KeyCode.LeftShift) && hasStamina) 
         {
-            Walk();
+             Run();
         }
         else 
         {
-            Run();
+            Walk();
         }
     }
 
@@ -92,7 +93,7 @@ public class MovmentScene2 : MonoBehaviour
 
     private void Walk()
     {
-        moveSpeed = walkSpeed;
+        moveSpeed = WALK_SPEED;
         _animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
 
         //adding stamina bar
@@ -100,7 +101,7 @@ public class MovmentScene2 : MonoBehaviour
     }
     private void Run()
     {
-        moveSpeed = runSpeed;
+        moveSpeed = RUN_SPEED;
         _animator.SetFloat("Speed", 1f, 0.1f,Time.deltaTime); //adding the smooth
 
         //adding stamina bar
