@@ -17,6 +17,9 @@ public class UIStaminaBar : MonoBehaviour
     private float regenerateAmount = 2;
     private float losingStaminaTime = 0.1f;
 
+    //coroutine reference
+    private Coroutine myCoroutineLosing;
+    private Coroutine myCoroutineRegenerate;
 
     void Start()
     {
@@ -31,13 +34,23 @@ public class UIStaminaBar : MonoBehaviour
     {
         if (currentStamina-amount > 0)
         {
-            StartCoroutine(LosingStaminaCorutine(amount));
+            if(myCoroutineLosing != null)
+            {
+                StopCoroutine(myCoroutineLosing);
+            }
 
-            StartCoroutine(RegenerateStaminaCorutine());
+            myCoroutineLosing = StartCoroutine(LosingStaminaCorutine(amount));
+
+            if (myCoroutineRegenerate != null)
+            {
+                StopCoroutine(myCoroutineRegenerate);
+            }
+            myCoroutineRegenerate = StartCoroutine(RegenerateStaminaCorutine());
         }
         else
         {
             Debug.Log("no Stamina");
+            FindObjectOfType<MovmentScene2>().hasStamina = false;
         }
 
 
@@ -53,7 +66,7 @@ public class UIStaminaBar : MonoBehaviour
 
             yield return new WaitForSeconds(losingStaminaTime);
         }
-
+        myCoroutineLosing = null;
         FindObjectOfType<MovmentScene2>().hasStamina = false;
        
        
@@ -70,5 +83,6 @@ public class UIStaminaBar : MonoBehaviour
 
             yield return new WaitForSeconds(regenerateStaminaTime);
         }
+        myCoroutineRegenerate = null;
     }
 }

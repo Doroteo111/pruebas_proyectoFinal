@@ -8,7 +8,7 @@ public class MovmentScene2 : MonoBehaviour
 {
     private float verticalInput; //movment
     private float moveSpeed;
-    public bool hasStamina=true;
+    public bool hasStamina = true;
     public  float turnSpeed = 60f; //speed
     public const float WALK_SPEED = 8f;
     public const float RUN_SPEED = 20f;
@@ -96,8 +96,8 @@ public class MovmentScene2 : MonoBehaviour
         moveSpeed = WALK_SPEED;
         _animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
 
-        //adding stamina bar
-        staminaSlider.UseStamina(0); 
+       
+       staminaSlider.UseStamina(0); 
     }
     private void Run()
     {
