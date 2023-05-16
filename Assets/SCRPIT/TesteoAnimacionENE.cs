@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TesteoAnimacionENE : MonoBehaviour
 {
-    private Animator _animator;
+    /*private Animator _animator;
     private int hearts = 2;
     public bool isGameOver;
     void Start()
@@ -53,5 +53,5 @@ public class TesteoAnimacionENE : MonoBehaviour
     {
         isGameOver = true;
         _animator.SetBool("isGameOver", true);
-    }
+    }*/
 }
