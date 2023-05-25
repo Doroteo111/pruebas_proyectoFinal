@@ -855,6 +855,7 @@ GameObject:
   - component: {fileID: 1045395811}
   - component: {fileID: 1045395815}
   - component: {fileID: 1045395816}
+  - component: {fileID: 1045395817}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -932,9 +933,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045395810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9afa48fe568f0e41beddff6804e0127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 60
+  jumpForce: 10
+  mouseSensitivity: 400
+--- !u!114 &1045395817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045395810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6df2367c1cc42d3bc3cc4b51e5427d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 60
@@ -1928,6 +1944,7 @@ GameObject:
   - component: {fileID: 2136189041}
   - component: {fileID: 2136189040}
   - component: {fileID: 2136189042}
+  - component: {fileID: 2136189043}
   m_Layer: 5
   m_Name: StaminaSlider
   m_TagString: Untagged
@@ -2029,9 +2046,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136189038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b31e1f88e111aa64c8d029fb9a3e43f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaBar: {fileID: 2136189041}
+--- !u!114 &2136189043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136189038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d400de0855604479cb1e209aa12fd7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   staminaBar: {fileID: 2136189041}
