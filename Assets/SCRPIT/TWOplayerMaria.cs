@@ -7,6 +7,8 @@ public class TWOplayerMaria : MonoBehaviour
 {
     private float verticalInput; //movment
     private float moveSpeed;
+
+   
     public float turnSpeed = 60f; //speed
     public const float WALK_SPEED = 8f;
     public const float RUN_SPEED = 20f;
@@ -61,7 +63,7 @@ public class TWOplayerMaria : MonoBehaviour
 
         if (verticalInput != 0)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && TWOstaminaMaria.instance.hasStamina )
             {
                 Run();
             }
@@ -80,14 +82,14 @@ public class TWOplayerMaria : MonoBehaviour
     {
         moveSpeed = 0;
         _animator.SetFloat("Speed", 0f, 0.1f, Time.deltaTime);
-        TWOstaminaMaria.instance.RegenStamina();
+        TWOstaminaMaria.instance.RegenStamina(5);
     }
 
     private void Walk()
     {
         moveSpeed = WALK_SPEED;
         _animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
-        TWOstaminaMaria.instance.RegenStamina();
+        TWOstaminaMaria.instance.RegenStamina(5);
     }
 
     private void Run()

@@ -14,6 +14,9 @@ public class TWOstaminaMaria : MonoBehaviour
     
     public static TWOstaminaMaria  instance;
 
+    public bool hasStamina = true;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -31,23 +34,24 @@ public class TWOstaminaMaria : MonoBehaviour
 
     public void UseStamina(int amount)
     {
-       if (currentStamina - amount >= 0)
+        currentStamina -= amount * Time.deltaTime;
+        if (currentStamina <= 0)
         {
-            currentStamina -= amount * Time.deltaTime;
-            staminaBar.value = currentStamina;
+            currentStamina = 0;
+            hasStamina = false;
         }
-        else
-        {
-            Debug.Log("Not enough stamina");
-        }
+       
+        staminaBar.value = currentStamina;
     }
 
-    public void RegenStamina()
+    public void RegenStamina(int amount)
     {
         if (currentStamina <= 100)
         {
-            currentStamina += maxStamina / 100 * Time.deltaTime;
+            currentStamina += amount * Time.deltaTime;
             staminaBar.value = currentStamina;
+
+            hasStamina = true;
         }
     }
 }
